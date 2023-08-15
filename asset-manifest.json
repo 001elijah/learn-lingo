@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/learn-lingo/static/css/main.e6c13ad2.css",
+    "main.js": "/learn-lingo/static/js/main.e3c9775c.js",
+    "index.html": "/learn-lingo/index.html",
+    "main.e6c13ad2.css.map": "/learn-lingo/static/css/main.e6c13ad2.css.map",
+    "main.e3c9775c.js.map": "/learn-lingo/static/js/main.e3c9775c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.e3c9775c.js"
+  ]
+}
