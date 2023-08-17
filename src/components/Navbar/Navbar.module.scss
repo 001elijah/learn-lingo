@@ -17,6 +17,8 @@
   left: -200%;
   transition: 150ms;
 
+  z-index: 1;
+
   &.active {
     left: 0;
     transition: 150ms;
