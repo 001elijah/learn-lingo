@@ -1,5 +1,5 @@
 @import "./assets/styles/reset";
-// @import './assets/styles/vars';
+@import './assets/styles/vars';
 @import "./assets/styles/mixins";
 
 @font-face {
@@ -15,7 +15,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
-  color: #121417;
+  color: $black-text-color;
 
   & .no-scroll {
     overflow: hidden;
