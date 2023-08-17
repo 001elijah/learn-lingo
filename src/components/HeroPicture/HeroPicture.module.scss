@@ -1,0 +1,23 @@
+@import "../../assets/styles/vars";
+@import "../../assets//styles/mixins";
+
+.picture {
+  width: 90%;
+  height: 530px;
+  margin: 0 auto;
+
+  background-color: $accent-color;
+  background-image: url("../../assets/images/mac.png"),
+    url("../../assets/images/human.png");
+  background-repeat: no-repeat;
+  background-position:
+    bottom,
+    50% 80px;
+  border-radius: 30px;
+
+  @include desktop {
+    width: 568px;
+    height: 530px;
+    margin: 0;
+  }
+}
