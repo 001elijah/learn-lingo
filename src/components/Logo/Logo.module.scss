@@ -1,0 +1,20 @@
+@import "../../assets/styles/vars";
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.caption {
+  color: $black-text-color;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.graphics {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #338af3 50%, #ffda44 50%);
+}
