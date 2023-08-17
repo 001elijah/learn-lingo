@@ -1,8 +1,8 @@
 {
   "name": "learn-lingo",
   "version": "0.1.0",
-  "homepage": "https://001elijah.github.io/learn-lingo",
   "private": true,
+  "homepage": "https://001elijah.github.io/learn-lingo/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
