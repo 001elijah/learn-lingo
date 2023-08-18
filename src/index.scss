@@ -49,9 +49,9 @@ body {
   margin: 0 auto;
 
   @include mobile {
-      width: 375px;
-    }
-  
+    width: 375px;
+  }
+
   @include tablet {
     width: 768px;
     padding: 0 32px;

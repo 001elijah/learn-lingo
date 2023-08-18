@@ -20,7 +20,7 @@ const Header = ({ changeColor }: { changeColor: Function }) => {
                 <ul className={s.topNavbar}>
                   {SIDEBAR_DATA.map(({ path, title }) => (
                     <li key={path}>
-                      {title === "Home" ?
+                      {title === "Home" ? (
                         <NavLink
                           className={s.navItem}
                           style={({ isActive }) =>
@@ -31,11 +31,11 @@ const Header = ({ changeColor }: { changeColor: Function }) => {
                               : { color: "#2c2c2c" }
                           }
                           to={path}
-                          onClick={() => changeColor('#fff')}
+                          onClick={() => changeColor("#fff")}
                         >
                           {title}
                         </NavLink>
-                        : 
+                      ) : (
                         <NavLink
                           className={s.navItem}
                           style={({ isActive }) =>
@@ -46,10 +46,11 @@ const Header = ({ changeColor }: { changeColor: Function }) => {
                               : { color: "#2c2c2c" }
                           }
                           to={path}
-                          onClick={() => changeColor('#f8f8f8')}
+                          onClick={() => changeColor("#f8f8f8")}
                         >
                           {title}
-                        </NavLink>}
+                        </NavLink>
+                      )}
                     </li>
                   ))}
                 </ul>

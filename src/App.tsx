@@ -6,14 +6,14 @@ import Favorites from "./pages/Favorites";
 import Header from "./components/Header/Header";
 
 function App() {
-  const [bodyColor, setBodyColor] = useState('#fff');
+  const [bodyColor, setBodyColor] = useState("#fff");
   const changeColor = (color: string) => {
-    setBodyColor(color)
-  }
+    setBodyColor(color);
+  };
   return (
-    <div style={{background: bodyColor}} id="main">
+    <div style={{ background: bodyColor }} id="main">
       <Routes>
-        <Route path="/" element={<Header changeColor={changeColor}/>}>
+        <Route path="/" element={<Header changeColor={changeColor} />}>
           <Route index element={<Home />} />
           <Route path="/teachers" element={<Teachers />} />
           <Route path="/favorites" element={<Favorites />} />

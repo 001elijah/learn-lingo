@@ -44,24 +44,31 @@ const Navbar = ({ changeColor }: { changeColor: Function }) => {
             {SIDEBAR_DATA.map((item, index) => {
               return (
                 <li key={index} className={s.navText}>
-                  {item.title === "Home" ?
+                  {item.title === "Home" ? (
                     <NavLink
                       to={item.path}
-                      onClick={() => { toggleSidebar(); changeColor('#fff')}}
+                      onClick={() => {
+                        toggleSidebar();
+                        changeColor("#fff");
+                      }}
                       className={({ isActive }) => (isActive ? s.isActive : "")}
                     >
                       {item.icons}
                       <span>{item.title}</span>
                     </NavLink>
-                    :
+                  ) : (
                     <NavLink
                       to={item.path}
-                      onClick={() => { toggleSidebar(); changeColor('#f8f8f8')}}
+                      onClick={() => {
+                        toggleSidebar();
+                        changeColor("#f8f8f8");
+                      }}
                       className={({ isActive }) => (isActive ? s.isActive : "")}
                     >
                       {item.icons}
                       <span>{item.title}</span>
-                    </NavLink>}
+                    </NavLink>
+                  )}
                 </li>
               );
             })}
