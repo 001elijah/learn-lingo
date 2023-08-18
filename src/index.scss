@@ -22,29 +22,50 @@ body {
   }
 }
 
-.container {
+.headerContainer {
   width: 100%;
   padding: 0 20px;
   margin: 0 auto;
-}
 
-@media screen and (min-width: 375px) {
-  .container {
+  @include mobile {
     width: 375px;
   }
-}
 
-@media screen and (min-width: 768px) {
-  .container {
+  @include tablet {
     width: 768px;
     padding: 0 32px;
   }
-}
 
-@media screen and (min-width: 1280px) {
-  .container {
+  @include desktop {
     min-width: 1280px;
     max-width: 1440px;
     padding: 0 48px;
+  }
+}
+
+.sectionContainer {
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @include mobile {
+      width: 375px;
+    }
+  
+  @include tablet {
+    width: 768px;
+    padding: 0 32px;
+  }
+
+  @include desktop {
+    min-width: 1280px;
+    max-width: 1440px;
+    padding: 0 48px;
+  }
+
+  @include desktopLarge {
+    min-width: 1312px;
+    max-width: 1440px;
+    padding: 0 0px;
   }
 }

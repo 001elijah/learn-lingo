@@ -1,0 +1,13 @@
+@import '../../assets/styles/vars';
+@import '../../assets/styles/mixins';
+
+.teacherCard {
+    display: flex;
+    width: 1184px;
+    padding: 24px;
+    align-items: flex-start;
+    gap: 48px;
+
+    border-radius: 24px;
+    background: #FFF;
+}

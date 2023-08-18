@@ -1,7 +1,8 @@
 import React from "react";
+import TeachersView from "../views/TeachersView";
 
 const Teachers = () => {
-  return <div>Teachers</div>;
+  return <TeachersView/>;
 };
 
 export default Teachers;

@@ -4,7 +4,7 @@ import HeroStats from "../components/HeroStats/HeroStats";
 
 const HomeView = () => {
   return (
-    <section>
+    <section className="sectionContainer">
       <Hero />
       <HeroStats />
     </section>
