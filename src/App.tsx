@@ -13,10 +13,16 @@ function App() {
   return (
     <div style={{ background: bodyColor }} id="main">
       <Routes>
-        <Route path="/" element={<Header changeColor={changeColor} />}>
-          <Route index element={<Home />} />
-          <Route path="/teachers" element={<Teachers />} />
-          <Route path="/favorites" element={<Favorites />} />
+        <Route path="/" element={<Header />}>
+          <Route index element={<Home changeColor={changeColor} />} />
+          <Route
+            path="/teachers"
+            element={<Teachers changeColor={changeColor} />}
+          />
+          <Route
+            path="/favorites"
+            element={<Favorites changeColor={changeColor} />}
+          />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>

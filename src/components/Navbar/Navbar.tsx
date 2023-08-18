@@ -8,7 +8,7 @@ import { SIDEBAR_DATA } from "../../utils/constants";
 import NavbarAuth from "../NavbarAuth/NavbarAuth";
 import s from "./Navbar.module.scss";
 
-const Navbar = ({ changeColor }: { changeColor: Function }) => {
+const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
   const toggleSidebar = () => setSidebar(!sidebar);
   useEffect(() => {
@@ -44,31 +44,16 @@ const Navbar = ({ changeColor }: { changeColor: Function }) => {
             {SIDEBAR_DATA.map((item, index) => {
               return (
                 <li key={index} className={s.navText}>
-                  {item.title === "Home" ? (
-                    <NavLink
-                      to={item.path}
-                      onClick={() => {
-                        toggleSidebar();
-                        changeColor("#fff");
-                      }}
-                      className={({ isActive }) => (isActive ? s.isActive : "")}
-                    >
-                      {item.icons}
-                      <span>{item.title}</span>
-                    </NavLink>
-                  ) : (
-                    <NavLink
-                      to={item.path}
-                      onClick={() => {
-                        toggleSidebar();
-                        changeColor("#f8f8f8");
-                      }}
-                      className={({ isActive }) => (isActive ? s.isActive : "")}
-                    >
-                      {item.icons}
-                      <span>{item.title}</span>
-                    </NavLink>
-                  )}
+                  <NavLink
+                    to={item.path}
+                    onClick={() => {
+                      toggleSidebar();
+                    }}
+                    className={({ isActive }) => (isActive ? s.isActive : "")}
+                  >
+                    {item.icons}
+                    <span>{item.title}</span>
+                  </NavLink>
                 </li>
               );
             })}

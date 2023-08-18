@@ -7,7 +7,7 @@ import Navbar from "../Navbar/Navbar";
 import NavbarAuth from "../NavbarAuth/NavbarAuth";
 import s from "./Header.module.scss";
 
-const Header = ({ changeColor }: { changeColor: Function }) => {
+const Header = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   return (
     <>
@@ -15,42 +15,24 @@ const Header = ({ changeColor }: { changeColor: Function }) => {
         {!isMobile && (
           <div className="headerContainer">
             <div className={s.headerFlexWrapper}>
-              <Logo changeColor={changeColor} />
+              <Logo />
               <nav>
                 <ul className={s.topNavbar}>
                   {SIDEBAR_DATA.map(({ path, title }) => (
                     <li key={path}>
-                      {title === "Home" ? (
-                        <NavLink
-                          className={s.navItem}
-                          style={({ isActive }) =>
-                            isActive
-                              ? {
-                                  color: "#ffb700",
-                                }
-                              : { color: "#2c2c2c" }
-                          }
-                          to={path}
-                          onClick={() => changeColor("#fff")}
-                        >
-                          {title}
-                        </NavLink>
-                      ) : (
-                        <NavLink
-                          className={s.navItem}
-                          style={({ isActive }) =>
-                            isActive
-                              ? {
-                                  color: "#ffb700",
-                                }
-                              : { color: "#2c2c2c" }
-                          }
-                          to={path}
-                          onClick={() => changeColor("#f8f8f8")}
-                        >
-                          {title}
-                        </NavLink>
-                      )}
+                      <NavLink
+                        className={s.navItem}
+                        style={({ isActive }) =>
+                          isActive
+                            ? {
+                                color: "#ffb700",
+                              }
+                            : { color: "#2c2c2c" }
+                        }
+                        to={path}
+                      >
+                        {title}
+                      </NavLink>
                     </li>
                   ))}
                 </ul>
@@ -66,8 +48,8 @@ const Header = ({ changeColor }: { changeColor: Function }) => {
         {isMobile && (
           <div className="headerContainer">
             <div className={s.headerFlexWrapper}>
-              <Logo changeColor={changeColor} />
-              <Navbar changeColor={changeColor} />
+              <Logo />
+              <Navbar />
             </div>
           </div>
         )}

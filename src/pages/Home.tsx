@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HomeView from "../views/HomeView";
 
-const Home = () => {
+const Home = ({ changeColor }: { changeColor: Function }) => {
+  useEffect(() => {
+    changeColor("#fff");
+  }, [changeColor]);
   return <HomeView />;
 };
 

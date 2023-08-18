@@ -1,6 +1,10 @@
 @import "../../assets/styles/vars";
 @import "../../assets/styles/mixins";
 
+.title {
+  visibility: hidden;
+}
+
 .teachersList {
   display: flex;
   flex-direction: column;
@@ -140,4 +144,125 @@
 
 .priceHighlight {
   color: #38cd3e;
+}
+
+.teacherName {
+  margin-top: 8px;
+  margin-bottom: 32px;
+}
+
+.furtherInfoList {
+  margin-bottom: 16px;
+  & li:not(:last-child) {
+    margin-bottom: 8px;
+  }
+}
+
+.furtherInfo {
+  display: block;
+  color: #8a8a89;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.blackUnderlined {
+  text-decoration-line: underline;
+  color: #121417;
+}
+
+.black {
+  color: #121417;
+}
+
+.paragraphLineHeight {
+  line-height: 1.5;
+}
+
+.reviewInstances {
+  margin: 32px 0;
+
+  & li:not(:last-child) {
+    margin-bottom: 32px;
+  }
+
+  @include desktop {
+    width: 65%;
+  }
+}
+
+.reviewerData {
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.reviewerAvatar {
+  @include desktop {
+    width: 44px;
+    height: 44px;
+    margin-right: 12px;
+    border-radius: 50%;
+    background-color: #b6b6b6;
+  }
+}
+
+.reviewerNameAndRating {
+  & > span {
+    display: block;
+  }
+}
+
+.colorGrey {
+  color: #8a8a89;
+}
+
+.ratingWithStar {
+  &:before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url("../../assets/icons/star.svg");
+  }
+
+  @include desktop {
+    font-size: 16px;
+    line-height: 1.28571;
+  }
+}
+
+.levels {
+  margin-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.level {
+  padding: 8px 12px;
+  border: 1px solid rgba(18, 20, 23, 0.2);
+  border-radius: 35px;
+
+  cursor: default;
+}
+
+.btn {
+  width: 100%;
+  padding: 16px 0px;
+
+  border: 0px;
+  border-radius: 12px;
+  background: #f4c550;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.55556;
+
+  cursor: pointer;
+
+  @include desktop {
+    width: 267px;
+  }
 }

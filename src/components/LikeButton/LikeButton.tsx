@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import s from "./LikeButton.module.scss";
 
 const LikeButton = ({
@@ -24,11 +24,11 @@ const LikeButton = ({
   );
 };
 
-LikeButton.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-  icon: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-};
+// LikeButton.propTypes = {
+//   handleClick: PropTypes.func.isRequired,
+//   id: PropTypes.number.isRequired,
+//   icon: PropTypes.string.isRequired,
+//   alt: PropTypes.string.isRequired,
+// };
 
 export default LikeButton;
