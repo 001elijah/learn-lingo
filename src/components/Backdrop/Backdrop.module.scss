@@ -1,0 +1,23 @@
+@import '../../assets/styles/vars';
+@import '../../assets/styles/mixins';
+
+.backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $backdrop-color;
+}
+
+// .backdrop {
+//     background-color: rgba(0, 0, 0, 0.7);
+//     position: fixed;
+//     z-index: 10;
+//     width: 100vw;
+//     height: 100vh;
+// }

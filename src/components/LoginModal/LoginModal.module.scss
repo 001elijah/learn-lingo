@@ -1,0 +1,165 @@
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/vars';
+
+.modal {
+    padding: 24px;
+
+    position: fixed;
+    // z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 70vh;
+    background-color: #fff;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    // gap: 1.5rem;
+
+    @include tablet {
+        width: 565px;
+        height: 505px;
+        padding: 64px;
+    }
+}
+
+.modalEnterActive {
+    animation: moveUp 0.7s ease-out forwards;
+}
+
+.modalExitActive {
+    animation: moveDown 0.7s ease-out forwards;
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translate(-50%, 100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+@keyframes moveDown {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 100%);
+        opacity: 0;
+    }
+}
+
+.closeButton {
+    width: 32px;
+    height: 32px;
+
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    background: none;
+    border: none;
+
+    cursor: pointer;
+}
+
+.title {
+    font-size: 40px;
+    line-height: 1.2;
+}
+
+.caption {
+    margin-top: 20px;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.375;
+    color: $dark-grey-text-color;
+}
+
+.emailInput {
+    width: 438px;
+    height: 54px;
+    margin-top: 40px;
+    padding: 16px 18px 16px 18px;
+
+    border-radius: 12px;
+    border: 1px solid rgba(18, 20, 23, 0.10);
+
+    color: $black-text-color;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.375;
+
+    &::placeholder {
+        opacity: 1;
+    }
+}
+
+.passwordInputWrapper {
+    position: relative;
+}
+
+.passwordInput {
+    width: 438px;
+    height: 54px;
+    margin-top: 20px;
+    padding: 16px 18px 16px 18px;
+
+    border-radius: 12px;
+    border: 1px solid rgba(18, 20, 23, 0.10);
+
+    color: $black-text-color;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.375;
+
+    &::placeholder {
+        opacity: 1;
+    }
+}
+
+.passwordShownButton {
+    width: 20px;
+    height: 20px;
+
+    position: absolute;
+    top: 37px;
+    right: 18px;
+
+    background: none;
+    border: none;
+
+    cursor: pointer;
+}
+
+.submitButton {
+    width: 100%;
+    margin-top: 40px;
+    padding: 16px 0px;
+
+    border: 0px;
+    border-radius: 12px;
+    background: #f4c550;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.55556;
+
+    cursor: pointer;
+
+    @include desktop {
+        width: 267px;
+    }
+}
