@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import LoginIcon from "../../assets/icons/login.svg";
-import Modal from "../LoginModal/LoginModal";
+import LoginModal from "../LoginModal/LoginModal";
 import ModalPortal from "../ModalPortal/ModalPortal";
 
 type Props = {
+  toggleSidebar?: Function;
   navbarAuth: string;
   navbarLogin: string;
   navbarRegister: string;
 };
 
-const NavbarAuth = ({ navbarAuth, navbarLogin, navbarRegister }: Props) => {
+const NavbarAuth = ({
+  toggleSidebar,
+  navbarAuth,
+  navbarLogin,
+  navbarRegister,
+}: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = async () => {
+    toggleSidebar && (await toggleSidebar());
     setIsModalOpen(!isModalOpen);
   };
 
@@ -32,7 +39,7 @@ const NavbarAuth = ({ navbarAuth, navbarLogin, navbarRegister }: Props) => {
         </li>
       </ul>
       <ModalPortal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <LoginModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </ModalPortal>
     </>
   );

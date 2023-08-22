@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import Backdrop from "../Backdrop/Backdrop";
 
@@ -14,14 +14,21 @@ const ModalPortal = ({
   isModalOpen: boolean;
   setIsModalOpen: Function;
 }) => {
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isModalOpen]);
   return (
-    <div>
+    <>
       {ReactDOM.createPortal(
         <Backdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />,
         modalRoot,
       )}
       {ReactDOM.createPortal(children, windowRoot)}
-    </div>
+    </>
   );
 };
 

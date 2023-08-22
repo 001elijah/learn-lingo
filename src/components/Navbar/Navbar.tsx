@@ -62,6 +62,7 @@ const Navbar = () => {
             navbarAuth={s.navbarAuth}
             navbarLogin={s.navbarLogin}
             navbarRegister={s.navbarRegister}
+            toggleSidebar={toggleSidebar}
           />
         </nav>
       </IconContext.Provider>
