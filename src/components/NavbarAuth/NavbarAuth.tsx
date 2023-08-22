@@ -14,7 +14,7 @@ const NavbarAuth = ({ navbarAuth, navbarLogin, navbarRegister }: Props) => {
 
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen);
-  }
+  };
 
   return (
     <>
@@ -26,7 +26,9 @@ const NavbarAuth = ({ navbarAuth, navbarLogin, navbarRegister }: Props) => {
           </button>
         </li>
         <li className={navbarRegister}>
-          <button type="button" onClick={handleOpenModal}>Registration</button>
+          <button type="button" onClick={handleOpenModal}>
+            Registration
+          </button>
         </li>
       </ul>
       <ModalPortal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
