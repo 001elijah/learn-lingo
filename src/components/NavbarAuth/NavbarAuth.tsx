@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LoginIcon from "../../assets/icons/login.svg";
 import LoginModal from "../LoginModal/LoginModal";
 import ModalPortal from "../ModalPortal/ModalPortal";
+import RegistrationModal from "../RegistrationModal/RegistrationModal";
 
 type Props = {
   toggleSidebar?: Function;
@@ -17,8 +18,20 @@ const NavbarAuth = ({
   navbarRegister,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginModal, setIsLoginModal] = useState(false);
+  const [isRegistrationModal, setIsRegistrationModal] = useState(false);
 
-  const handleOpenModal = async () => {
+  const handleOpenModal = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const button = e.target as HTMLElement;
+    
+    if (button.innerText === "Login") {
+      setIsRegistrationModal(false);
+      await setIsLoginModal(true);
+    } else {
+      setIsLoginModal(false);
+      await setIsRegistrationModal(true);
+    }
+
     toggleSidebar && (await toggleSidebar());
     setIsModalOpen(!isModalOpen);
   };
@@ -27,19 +40,30 @@ const NavbarAuth = ({
     <>
       <ul className={navbarAuth}>
         <li className={navbarLogin}>
-          <button type="button" onClick={handleOpenModal}>
+          <button type="button" onClick={(e) => handleOpenModal(e)}>
             <img src={LoginIcon} alt="Login Icon" />
             Login
           </button>
         </li>
         <li className={navbarRegister}>
-          <button type="button" onClick={handleOpenModal}>
+          <button type="button" onClick={(e) => handleOpenModal(e)}>
             Registration
           </button>
         </li>
       </ul>
       <ModalPortal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-        <LoginModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        {isLoginModal && (
+          <LoginModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
+        {isRegistrationModal && (
+          <RegistrationModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
       </ModalPortal>
     </>
   );
