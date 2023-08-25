@@ -8,17 +8,13 @@ const LikeButton = ({
   icon,
   alt,
 }: {
-  handleClick?: Function;
-  id?: number;
+  handleClick: Function;
+  id: string;
   icon?: string;
   alt?: string;
 }) => {
   return (
-    <button
-      type="button"
-      // onClick={() => handleClick(id)}
-      className={s.liked}
-    >
+    <button type="button" onClick={() => handleClick(id)} className={s.liked}>
       <img src={icon} alt={alt} />
     </button>
   );

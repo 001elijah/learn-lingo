@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LikeButton from "../LikeButton/LikeButton";
 import Like from "../../assets/icons/like.svg";
-// import Liked from "../../assets/icons/liked.svg";
+import Liked from "../../assets/icons/liked.svg";
 import s from "./TeacherCard.module.scss";
 import ModalPortal from "../ModalPortal/ModalPortal";
 import BookTrialModal from "../BookTrialModal/BookTrialModal";
 
 const TeacherCard = ({
-  teacher,
+  favoriteTeachers,
+  addToFavorites,
+  removeFromFavorites,
+  teacherInfo,
 }: {
-  teacher: {
+  favoriteTeachers: any[];
+  addToFavorites: Function;
+  removeFromFavorites: Function;
+  teacherInfo: {
+    id: string;
     avatar_url: string;
     lessons_done: number;
     rating: number;
@@ -29,9 +36,30 @@ const TeacherCard = ({
   };
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  const handleToggleLiked = (id: string) => {
+    if (!isLiked) {
+      addToFavorites(id);
+    } else {
+      removeFromFavorites(id);
+    }
+  };
+
+  useEffect(() => {
+    if (favoriteTeachers?.length) {
+      setIsLiked(
+        favoriteTeachers?.find((teacher) => teacher.id === teacherInfo.id)
+          ? true
+          : false,
+      );
+    } else {
+      setIsLiked(false);
+    }
+  }, [favoriteTeachers, teacherInfo.id]);
   return (
     <>
       <li className={s.teacherCard}>
@@ -39,13 +67,27 @@ const TeacherCard = ({
           <div className={s.roundImageBorder}>
             <img
               className={s.teacherPhoto}
-              src={teacher.avatar_url}
+              src={teacherInfo.avatar_url}
               alt="teacher"
             />
           </div>
         </div>
         <div>
-          <LikeButton icon={Like} alt={"like"} />
+          {isLiked ? (
+            <LikeButton
+              icon={Liked}
+              alt={"liked"}
+              id={teacherInfo.id}
+              handleClick={handleToggleLiked}
+            />
+          ) : (
+            <LikeButton
+              icon={Like}
+              alt={"like"}
+              id={teacherInfo.id}
+              handleClick={handleToggleLiked}
+            />
+          )}
           <ul className={s.teacherCommonInfo}>
             <li>
               <span className={s.languages}>Languages</span>
@@ -55,49 +97,49 @@ const TeacherCard = ({
             </li>
             <li>
               <span className={s.lessonsDone}>
-                Lessons done: {teacher.lessons_done}
+                Lessons done: {teacherInfo.lessons_done}
               </span>
             </li>
             <li>
-              <span className={s.rating}>Rating: {teacher.rating}</span>
+              <span className={s.rating}>Rating: {teacherInfo.rating}</span>
             </li>
             <li>
               <span className={s.price}>
                 Price / 1 hour:{" "}
                 <span className={s.priceHighlight}>
-                  {teacher.price_per_hour}$
+                  {teacherInfo.price_per_hour}$
                 </span>
               </span>
             </li>
           </ul>
           <h2 className={s.teacherName}>
-            {teacher.name} {teacher.surname}
+            {teacherInfo.name} {teacherInfo.surname}
           </h2>
           <ul className={s.furtherInfoList}>
             <li>
               <span className={s.furtherInfo}>
                 Speaks:{" "}
                 <span className={s.blackUnderlined}>
-                  {teacher.languages.join(", ")}
+                  {teacherInfo.languages.join(", ")}
                 </span>
               </span>
             </li>
             <li>
               <span className={s.furtherInfo}>
                 Lesson info:{" "}
-                <span className={s.black}>{teacher.lesson_info}</span>
+                <span className={s.black}>{teacherInfo.lesson_info}</span>
               </span>
             </li>
             <li>
               <span className={s.furtherInfo}>
                 Conditions:{" "}
-                <span className={s.black}>{teacher.conditions}</span>
+                <span className={s.black}>{teacherInfo.conditions}</span>
               </span>
             </li>
           </ul>
-          <p className={s.paragraphLineHeight}>{teacher.experience}</p>
+          <p className={s.paragraphLineHeight}>{teacherInfo.experience}</p>
           <ul className={s.reviewInstances}>
-            {teacher.reviews.map((review, index) => (
+            {teacherInfo.reviews.map((review, index) => (
               <li key={index}>
                 <div className={s.reviewerData}>
                   <div className={s.reviewerAvatar}></div>
@@ -115,7 +157,7 @@ const TeacherCard = ({
             ))}
           </ul>
           <ul className={s.levels}>
-            {teacher.levels.map((level, index) => (
+            {teacherInfo.levels.map((level, index) => (
               <li key={index} className={s.level}>
                 #{level}
               </li>
@@ -128,8 +170,8 @@ const TeacherCard = ({
       </li>
       <ModalPortal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
         <BookTrialModal
-          teacherName={teacher.name + " " + teacher.surname}
-          teacherPhoto={teacher.avatar_url}
+          teacherName={teacherInfo.name + " " + teacherInfo.surname}
+          teacherPhoto={teacherInfo.avatar_url}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
         />
