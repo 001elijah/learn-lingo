@@ -23,7 +23,7 @@ const NavbarAuth = ({
 
   const handleOpenModal = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const button = e.target as HTMLElement;
-    
+
     if (button.innerText === "Login") {
       setIsRegistrationModal(false);
       await setIsLoginModal(true);
