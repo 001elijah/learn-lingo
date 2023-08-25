@@ -11,7 +11,23 @@ function App() {
   const changeColor = (color: string) => {
     setBodyColor(color);
   };
-  const [favoriteTeachers, setFavoriteTeachers] = useState(() => {
+  const [favoriteTeachers, setFavoriteTeachers] = useState<
+    {
+      id: string;
+      avatar_url: string;
+      lessons_done: number;
+      rating: number;
+      price_per_hour: number;
+      name: string;
+      surname: string;
+      languages: string[];
+      lesson_info: string;
+      conditions: string[];
+      experience: string;
+      reviews: any[];
+      levels: string[];
+    }[]
+  >(() => {
     try {
       const items = JSON.parse(localStorage.getItem("favoriteTeachers") || "");
       if (items) {
@@ -26,13 +42,13 @@ function App() {
 
   const addToFavorites = (id: string) => {
     const teacher = teachers.filter((item) => item.id === id);
-    setFavoriteTeachers((prevState: []) =>
+    setFavoriteTeachers((prevState) =>
       prevState ? [...prevState, ...teacher] : [...teacher],
     );
   };
 
   const removeFromFavorites = (id: string) => {
-    setFavoriteTeachers((prevState: [{ id: string }]) =>
+    setFavoriteTeachers((prevState) =>
       prevState.filter((item) => item.id !== id),
     );
   };
@@ -66,7 +82,14 @@ function App() {
           />
           <Route
             path="/favorites"
-            element={<Favorites changeColor={changeColor} />}
+            element={
+              <Favorites
+                favoriteTeachers={favoriteTeachers}
+                addToFavorites={addToFavorites}
+                removeFromFavorites={removeFromFavorites}
+                changeColor={changeColor}
+              />
+            }
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>

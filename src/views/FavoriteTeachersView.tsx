@@ -1,7 +1,7 @@
 import React from "react";
-import TeachersList from "../components/TeachersList/TeachersList";
+import FavoriteTeachersList from "../components/FavoriteTeachersList/FavoriteTeachersList";
 
-const TeachersView = ({
+const FavoriteTeachersView = ({
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
@@ -26,7 +26,7 @@ const TeachersView = ({
 }) => {
   return (
     <section className="sectionContainer">
-      <TeachersList
+      <FavoriteTeachersList
         favoriteTeachers={favoriteTeachers}
         addToFavorites={addToFavorites}
         removeFromFavorites={removeFromFavorites}
@@ -35,4 +35,4 @@ const TeachersView = ({
   );
 };
 
-export default TeachersView;
+export default FavoriteTeachersView;
