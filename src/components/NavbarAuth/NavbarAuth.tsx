@@ -43,16 +43,12 @@ const NavbarAuth = ({
 
   const handleLogout = () => {
     logoutAPI();
-  }
+  };
 
   return (
     <>
       {isLoggedIn ? (
-        <button
-          className={navbarLogout}
-          type="button"
-          onClick={handleLogout}
-        >
+        <button className={navbarLogout} type="button" onClick={handleLogout}>
           <img src={LoginIcon} alt="Login Icon" />
           Log Out
         </button>

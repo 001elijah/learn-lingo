@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import X from "../../assets/icons/x.svg";
 import Eye from "../../assets/icons/eye-off.svg";
 import EyeOn from "../../assets/icons/eye-on.svg";
+import { loginAPI } from "../../services/firebaseAPI";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -30,6 +31,7 @@ const LoginModal = ({
     },
     onSubmit: (values, actions) => {
       console.log(JSON.stringify(values, null, 2));
+      loginAPI(values);
       actions.resetForm({ values: { email: "", password: "" } });
     },
     validationSchema: LoginSchema,
