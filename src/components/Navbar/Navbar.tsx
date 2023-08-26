@@ -4,11 +4,14 @@ import { Link, NavLink } from "react-router-dom";
 import { IconContext } from "react-icons";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { SIDEBAR_DATA } from "../../utils/constants";
+import {
+  SIDEBAR_DATA_LOGGED_IN,
+  SIDEBAR_DATA_LOGGED_OUT,
+} from "../../utils/constants";
 import NavbarAuth from "../NavbarAuth/NavbarAuth";
 import s from "./Navbar.module.scss";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [sidebar, setSidebar] = useState(false);
   const toggleSidebar = () => setSidebar(!sidebar);
   useEffect(() => {
@@ -41,7 +44,10 @@ const Navbar = () => {
                 />
               </Link>
             </li>
-            {SIDEBAR_DATA.map((item, index) => {
+            {(isLoggedIn
+              ? SIDEBAR_DATA_LOGGED_IN
+              : SIDEBAR_DATA_LOGGED_OUT
+            ).map((item, index) => {
               return (
                 <li key={index} className={s.navText}>
                   <NavLink
@@ -59,8 +65,10 @@ const Navbar = () => {
             })}
           </ul>
           <NavbarAuth
+            isLoggedIn={isLoggedIn}
             navbarAuth={s.navbarAuth}
             navbarLogin={s.navbarLogin}
+            navbarLogout={s.navbarLogout}
             navbarRegister={s.navbarRegister}
             toggleSidebar={toggleSidebar}
           />

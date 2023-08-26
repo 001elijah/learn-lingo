@@ -1,13 +1,16 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { SIDEBAR_DATA } from "../../utils/constants";
+import {
+  SIDEBAR_DATA_LOGGED_IN,
+  SIDEBAR_DATA_LOGGED_OUT,
+} from "../../utils/constants";
 import Logo from "../Logo/Logo";
 import Navbar from "../Navbar/Navbar";
 import NavbarAuth from "../NavbarAuth/NavbarAuth";
 import s from "./Header.module.scss";
 
-const Header = () => {
+const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   return (
     <>
@@ -18,7 +21,10 @@ const Header = () => {
               <Logo />
               <nav>
                 <ul className={s.topNavbar}>
-                  {SIDEBAR_DATA.map(({ path, title }) => (
+                  {(isLoggedIn
+                    ? SIDEBAR_DATA_LOGGED_IN
+                    : SIDEBAR_DATA_LOGGED_OUT
+                  ).map(({ path, title }) => (
                     <li key={path}>
                       <NavLink
                         className={s.navItem}
@@ -38,8 +44,10 @@ const Header = () => {
                 </ul>
               </nav>
               <NavbarAuth
+                isLoggedIn={isLoggedIn}
                 navbarAuth={s.navbarAuth}
                 navbarLogin={s.navbarLogin}
+                navbarLogout={s.navbarLogout}
                 navbarRegister={s.navbarRegister}
               />
             </div>
@@ -49,7 +57,7 @@ const Header = () => {
           <div className="headerContainer">
             <div className={s.headerFlexWrapper}>
               <Logo />
-              <Navbar />
+              <Navbar isLoggedIn={isLoggedIn} />
             </div>
           </div>
         )}

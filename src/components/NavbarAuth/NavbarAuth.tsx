@@ -5,16 +5,20 @@ import ModalPortal from "../ModalPortal/ModalPortal";
 import RegistrationModal from "../RegistrationModal/RegistrationModal";
 
 type Props = {
+  isLoggedIn: boolean;
   toggleSidebar?: Function;
   navbarAuth: string;
   navbarLogin: string;
+  navbarLogout: string;
   navbarRegister: string;
 };
 
 const NavbarAuth = ({
+  isLoggedIn,
   toggleSidebar,
   navbarAuth,
   navbarLogin,
+  navbarLogout,
   navbarRegister,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,33 +42,49 @@ const NavbarAuth = ({
 
   return (
     <>
-      <ul className={navbarAuth}>
-        <li className={navbarLogin}>
-          <button type="button" onClick={(e) => handleOpenModal(e)}>
-            <img src={LoginIcon} alt="Login Icon" />
-            Login
-          </button>
-        </li>
-        <li className={navbarRegister}>
-          <button type="button" onClick={(e) => handleOpenModal(e)}>
-            Registration
-          </button>
-        </li>
-      </ul>
-      <ModalPortal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-        {isLoginModal && (
-          <LoginModal
+      {isLoggedIn ? (
+        <button
+          className={navbarLogout}
+          type="button"
+          onClick={(e) => handleOpenModal(e)}
+        >
+          <img src={LoginIcon} alt="Login Icon" />
+          Log Out
+        </button>
+      ) : (
+        <>
+          <ul className={navbarAuth}>
+            <li className={navbarLogin}>
+              <button type="button" onClick={(e) => handleOpenModal(e)}>
+                <img src={LoginIcon} alt="Login Icon" />
+                Login
+              </button>
+            </li>
+            <li className={navbarRegister}>
+              <button type="button" onClick={(e) => handleOpenModal(e)}>
+                Registration
+              </button>
+            </li>
+          </ul>
+          <ModalPortal
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
-          />
-        )}
-        {isRegistrationModal && (
-          <RegistrationModal
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-          />
-        )}
-      </ModalPortal>
+          >
+            {isLoginModal && (
+              <LoginModal
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+              />
+            )}
+            {isRegistrationModal && (
+              <RegistrationModal
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+              />
+            )}
+          </ModalPortal>
+        </>
+      )}
     </>
   );
 };

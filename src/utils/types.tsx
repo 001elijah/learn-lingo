@@ -18,3 +18,9 @@ export type Teacher = {
   }[];
   levels: string[];
 };
+
+export type User = {
+  name?: string;
+  email: string;
+  password: string;
+};

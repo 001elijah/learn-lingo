@@ -3,7 +3,6 @@
 .burgerIcon {
   width: 24px;
   height: 24px;
-  cursor: pointer;
 }
 
 .sidebar {
@@ -65,10 +64,6 @@
 
 .menuControls {
   color: $black-text-color;
-
-  & :hover {
-    cursor: pointer;
-  }
 }
 
 .navbarAuth {
@@ -93,9 +88,24 @@
       margin-right: 8px;
     }
   }
+}
 
-  & :hover {
-    cursor: pointer;
+.navbarLogout {
+  width: 100%;
+  height: 60px;
+
+  margin-top: auto;
+  padding: 8px 16px 8px 16px;
+
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  color: $black-text-color;
+  & img {
+    margin-right: 8px;
   }
 }
 
@@ -115,8 +125,5 @@
     font-family: "Roboto", sans-serif;
     font-size: 18px;
     color: $white-text-color;
-  }
-  & :hover {
-    cursor: pointer;
   }
 }

@@ -6,12 +6,15 @@ import Favorites from "./pages/Favorites";
 import Header from "./components/Header/Header";
 import { readTeachersAPI } from "./services/firebaseAPI";
 import { Teacher } from "./utils/types";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./services/firebaseConfig";
 
 function App() {
   const [bodyColor, setBodyColor] = useState("#fff");
   const changeColor = (color: string) => {
     setBodyColor(color);
   };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [favoriteTeachers, setFavoriteTeachers] = useState<Teacher[]>(() => {
     try {
@@ -40,6 +43,19 @@ function App() {
   };
 
   useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log("uid", uid);
+        setIsLoggedIn(true);
+      } else {
+        console.log("user is logged out");
+        setIsLoggedIn(false);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     (async () => {
       const items: any = await readTeachersAPI();
       if (items) {
@@ -62,7 +78,7 @@ function App() {
   return (
     <div style={{ background: bodyColor }} id="main">
       <Routes>
-        <Route path="/" element={<Header />}>
+        <Route path="/" element={<Header isLoggedIn={isLoggedIn} />}>
           <Route index element={<Home changeColor={changeColor} />} />
           <Route
             path="/teachers"
