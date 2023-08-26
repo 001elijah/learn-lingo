@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import X from "../../assets/icons/x.svg";
 import Eye from "../../assets/icons/eye-off.svg";
 import EyeOn from "../../assets/icons/eye-on.svg";
+import { registerAPI } from "../../services/firebaseAPI";
 
 const RegistrationSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
@@ -31,7 +32,8 @@ const RegistrationModal = ({
       password: "",
     },
     onSubmit: (values, actions) => {
-      console.log(JSON.stringify(values, null, 2));
+      console.log(values);
+      registerAPI(values);
       actions.resetForm({ values: { name: "", email: "", password: "" } });
     },
     validationSchema: RegistrationSchema,
