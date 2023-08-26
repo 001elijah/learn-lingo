@@ -274,14 +274,19 @@
 
   border: 0px;
   border-radius: 12px;
-  background: #f4c550;
+  background: $accent-color;
 
+  color: $black-text-color;
   font-family: "Roboto", sans-serif;
   font-size: 18px;
   font-weight: 700;
   line-height: 1.55556;
 
   cursor: pointer;
+
+  &:hover {
+    background-color: $accent-hover-color;
+  }
 
   @include desktop {
     width: 267px;

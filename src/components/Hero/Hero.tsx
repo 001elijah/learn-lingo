@@ -1,8 +1,13 @@
 import React from "react";
 import s from "./Hero.module.scss";
 import HeroPicture from "../HeroPicture/HeroPicture";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+  const handleGetStarted = () => {
+    navigate("/teachers");
+  };
   return (
     <div className={s.flexWrapper}>
       <div className={s.hero}>
@@ -15,7 +20,7 @@ const Hero = () => {
           Elevate your language proficiency to new heights by connecting with
           highly qualified and experienced tutors.
         </p>
-        <button type="button" className={s.btn}>
+        <button type="button" className={s.btn} onClick={handleGetStarted}>
           Get started
         </button>
       </div>

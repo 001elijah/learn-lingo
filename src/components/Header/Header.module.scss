@@ -17,21 +17,33 @@
 }
 
 .navItem {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 4px;
+
+  border-radius: 12px;
+
   font-family: "Roboto";
   font-size: 16px;
   font-style: normal;
   color: $black-text-color;
   font-weight: 400;
   line-height: 1.25;
+
+  &:hover {
+    background-color: $accent-color;
+  }
 }
 
 .navbarAuth {
   display: flex;
+  align-items: center;
   gap: 16px;
 }
 
 .navbarLogin {
-  height: 60px;
+  height: 48px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -39,41 +51,50 @@
   & button {
     width: 100%;
     height: 100%;
+    padding: 0 4px;
     display: flex;
     align-items: center;
     background: none;
     border: none;
+    border-radius: 12px;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: 700;
     color: $black-text-color;
 
+    cursor: pointer;
+
+    &:hover {
+      background-color: $accent-color;
+    }
+
     & img {
       margin-right: 8px;
     }
   }
-
-  & :hover {
-    cursor: pointer;
-  }
 }
 
 .navbarLogout {
+  height: 100%;
+  padding: 0 4px;
   display: flex;
   align-items: center;
   background: none;
   border: none;
+  border-radius: 12px;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: $black-text-color;
+
+  cursor: pointer;
 
   & img {
     margin-right: 8px;
   }
 
   &:hover {
-    cursor: pointer;
+    background-color: $accent-color;
   }
 }
 
@@ -97,9 +118,11 @@
     font-size: 16px;
     font-weight: 700;
     color: $white-text-color;
-  }
 
-  & :hover {
     cursor: pointer;
+
+    &:hover {
+      background-color: $grey-text-color;
+    }
   }
 }
