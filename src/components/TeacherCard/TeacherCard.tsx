@@ -125,7 +125,13 @@ const TeacherCard = ({
             {teacherInfo.reviews.map((review, index) => (
               <li key={index}>
                 <div className={s.reviewerData}>
-                  <div className={s.reviewerAvatar}></div>
+                  <div className={s.reviewerAvatar}>
+                    <img
+                      className={s.reviewerPhoto}
+                      src={review.reviewer_avatar_url}
+                      alt={review.reviewer_name}
+                    />
+                  </div>
                   <div className={s.reviewerNameAndRating}>
                     <span className={s.colorGrey}>{review.reviewer_name}</span>
                     <span className={s.ratingWithStar}>

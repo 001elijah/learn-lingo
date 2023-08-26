@@ -214,6 +214,13 @@
   border-radius: 50%;
 
   background-color: #b6b6b6;
+
+  overflow: hidden;
+}
+
+.reviewerPhoto {
+  width: 44px;
+  height: 44px;
 }
 
 .reviewerNameAndRating {

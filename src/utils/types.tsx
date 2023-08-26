@@ -12,7 +12,7 @@ export type Teacher = {
   experience: string;
   reviews: {
     reviewer_name: string;
-    avatar_url: string;
+    reviewer_avatar_url: string;
     reviewer_rating: number;
     comment: string;
   }[];
