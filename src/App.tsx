@@ -4,30 +4,16 @@ import Home from "./pages/Home";
 import Teachers from "./pages/Teachers";
 import Favorites from "./pages/Favorites";
 import Header from "./components/Header/Header";
-import { teachers } from "./services/teachers";
+import { readTeachersAPI } from "./services/firebaseAPI";
+import { Teacher } from "./utils/types";
 
 function App() {
   const [bodyColor, setBodyColor] = useState("#fff");
   const changeColor = (color: string) => {
     setBodyColor(color);
   };
-  const [favoriteTeachers, setFavoriteTeachers] = useState<
-    {
-      id: string;
-      avatar_url: string;
-      lessons_done: number;
-      rating: number;
-      price_per_hour: number;
-      name: string;
-      surname: string;
-      languages: string[];
-      lesson_info: string;
-      conditions: string[];
-      experience: string;
-      reviews: any[];
-      levels: string[];
-    }[]
-  >(() => {
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const [favoriteTeachers, setFavoriteTeachers] = useState<Teacher[]>(() => {
     try {
       const items = JSON.parse(localStorage.getItem("favoriteTeachers") || "");
       if (items) {
@@ -54,6 +40,15 @@ function App() {
   };
 
   useEffect(() => {
+    (async () => {
+      const items: any = await readTeachersAPI();
+      if (items) {
+        setTeachers(items);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
     try {
       localStorage.setItem(
         "favoriteTeachers",
@@ -73,6 +68,7 @@ function App() {
             path="/teachers"
             element={
               <Teachers
+                teachers={teachers}
                 favoriteTeachers={favoriteTeachers}
                 addToFavorites={addToFavorites}
                 removeFromFavorites={removeFromFavorites}

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import FavoriteTeachersView from "../views/FavoriteTeachersView";
+import { Teacher } from "../utils/types";
 
 const Favorites = ({
   favoriteTeachers,
@@ -7,7 +8,7 @@ const Favorites = ({
   removeFromFavorites,
   changeColor,
 }: {
-  favoriteTeachers: any;
+  favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
   changeColor: Function;

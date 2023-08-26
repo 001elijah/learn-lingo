@@ -5,6 +5,7 @@ import Liked from "../../assets/icons/liked.svg";
 import s from "./TeacherCard.module.scss";
 import ModalPortal from "../ModalPortal/ModalPortal";
 import BookTrialModal from "../BookTrialModal/BookTrialModal";
+import { Teacher } from "../../utils/types";
 
 const TeacherCard = ({
   favoriteTeachers,
@@ -12,42 +13,10 @@ const TeacherCard = ({
   removeFromFavorites,
   teacherInfo,
 }: {
-  favoriteTeachers: {
-    id: string;
-    avatar_url: string;
-    lessons_done: number;
-    rating: number;
-    price_per_hour: number;
-    name: string;
-    surname: string;
-    languages: string[];
-    lesson_info: string;
-    conditions: string[];
-    experience: string;
-    reviews: any[];
-    levels: string[];
-  }[];
+  favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
-  teacherInfo: {
-    id: string;
-    avatar_url: string;
-    lessons_done: number;
-    rating: number;
-    price_per_hour: number;
-    name: string;
-    surname: string;
-    languages: string[];
-    lesson_info: string;
-    conditions: string[];
-    experience: string;
-    reviews: {
-      reviewer_name: string;
-      reviewer_rating: number;
-      comment: string;
-    }[];
-    levels: string[];
-  };
+  teacherInfo: Teacher;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLiked, setIsLiked] = useState(false);

@@ -1,32 +1,22 @@
 import React from "react";
 import TeachersList from "../components/TeachersList/TeachersList";
+import { Teacher } from "../utils/types";
 
 const TeachersView = ({
+  teachers,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
 }: {
-  favoriteTeachers: {
-    id: string;
-    avatar_url: string;
-    lessons_done: number;
-    rating: number;
-    price_per_hour: number;
-    name: string;
-    surname: string;
-    languages: string[];
-    lesson_info: string;
-    conditions: string[];
-    experience: string;
-    reviews: any[];
-    levels: string[];
-  }[];
+  teachers: Teacher[];
+  favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
 }) => {
   return (
     <section className="sectionContainer">
       <TeachersList
+        teachers={teachers}
         favoriteTeachers={favoriteTeachers}
         addToFavorites={addToFavorites}
         removeFromFavorites={removeFromFavorites}

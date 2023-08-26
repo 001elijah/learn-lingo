@@ -1,26 +1,13 @@
 import React from "react";
 import FavoriteTeachersList from "../components/FavoriteTeachersList/FavoriteTeachersList";
+import { Teacher } from "../utils/types";
 
 const FavoriteTeachersView = ({
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
 }: {
-  favoriteTeachers: {
-    id: string;
-    avatar_url: string;
-    lessons_done: number;
-    rating: number;
-    price_per_hour: number;
-    name: string;
-    surname: string;
-    languages: string[];
-    lesson_info: string;
-    conditions: string[];
-    experience: string;
-    reviews: any[];
-    levels: string[];
-  }[];
+  favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
 }) => {

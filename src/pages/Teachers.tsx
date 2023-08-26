@@ -1,27 +1,16 @@
 import React, { useEffect } from "react";
 import TeachersView from "../views/TeachersView";
+import { Teacher } from "../utils/types";
 
 const Teachers = ({
+  teachers,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
   changeColor,
 }: {
-  favoriteTeachers: {
-    id: string;
-    avatar_url: string;
-    lessons_done: number;
-    rating: number;
-    price_per_hour: number;
-    name: string;
-    surname: string;
-    languages: string[];
-    lesson_info: string;
-    conditions: string[];
-    experience: string;
-    reviews: any[];
-    levels: string[];
-  }[];
+  teachers: Teacher[];
+  favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
   changeColor: Function;
@@ -32,6 +21,7 @@ const Teachers = ({
 
   return (
     <TeachersView
+      teachers={teachers}
       favoriteTeachers={favoriteTeachers}
       addToFavorites={addToFavorites}
       removeFromFavorites={removeFromFavorites}
