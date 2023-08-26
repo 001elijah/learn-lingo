@@ -3,6 +3,7 @@ import LoginIcon from "../../assets/icons/login.svg";
 import LoginModal from "../LoginModal/LoginModal";
 import ModalPortal from "../ModalPortal/ModalPortal";
 import RegistrationModal from "../RegistrationModal/RegistrationModal";
+import { logoutAPI } from "../../services/firebaseAPI";
 
 type Props = {
   isLoggedIn: boolean;
@@ -40,13 +41,17 @@ const NavbarAuth = ({
     setIsModalOpen(!isModalOpen);
   };
 
+  const handleLogout = () => {
+    logoutAPI();
+  }
+
   return (
     <>
       {isLoggedIn ? (
         <button
           className={navbarLogout}
           type="button"
-          onClick={(e) => handleOpenModal(e)}
+          onClick={handleLogout}
         >
           <img src={LoginIcon} alt="Login Icon" />
           Log Out
