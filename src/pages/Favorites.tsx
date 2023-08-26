@@ -3,11 +3,13 @@ import FavoriteTeachersView from "../views/FavoriteTeachersView";
 import { Teacher } from "../utils/types";
 
 const Favorites = ({
+  isLoggedIn,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
   changeColor,
 }: {
+  isLoggedIn: boolean;
   favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
@@ -18,6 +20,7 @@ const Favorites = ({
   }, [changeColor]);
   return (
     <FavoriteTeachersView
+      isLoggedIn={isLoggedIn}
       favoriteTeachers={favoriteTeachers}
       addToFavorites={addToFavorites}
       removeFromFavorites={removeFromFavorites}

@@ -84,6 +84,7 @@ function App() {
             path="/teachers"
             element={
               <Teachers
+                isLoggedIn={isLoggedIn}
                 teachers={teachers}
                 favoriteTeachers={favoriteTeachers}
                 addToFavorites={addToFavorites}
@@ -96,6 +97,7 @@ function App() {
             path="/favorites"
             element={
               <Favorites
+                isLoggedIn={isLoggedIn}
                 favoriteTeachers={favoriteTeachers}
                 addToFavorites={addToFavorites}
                 removeFromFavorites={removeFromFavorites}

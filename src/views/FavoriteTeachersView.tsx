@@ -3,10 +3,12 @@ import FavoriteTeachersList from "../components/FavoriteTeachersList/FavoriteTea
 import { Teacher } from "../utils/types";
 
 const FavoriteTeachersView = ({
+  isLoggedIn,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
 }: {
+  isLoggedIn: boolean;
   favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
@@ -14,6 +16,7 @@ const FavoriteTeachersView = ({
   return (
     <section className="sectionContainer">
       <FavoriteTeachersList
+        isLoggedIn={isLoggedIn}
         favoriteTeachers={favoriteTeachers}
         addToFavorites={addToFavorites}
         removeFromFavorites={removeFromFavorites}

@@ -5,10 +5,12 @@ import s from "./FavoriteTeachersList.module.scss";
 import { Teacher } from "../../utils/types";
 
 const FavoriteTeachersList = ({
+  isLoggedIn,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
 }: {
+  isLoggedIn: boolean;
   favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
@@ -24,6 +26,7 @@ const FavoriteTeachersList = ({
           {favoriteTeachers.map((teacher, index) => (
             <TeacherCard
               key={index}
+              isLoggedIn={isLoggedIn}
               favoriteTeachers={favoriteTeachers}
               addToFavorites={addToFavorites}
               removeFromFavorites={removeFromFavorites}

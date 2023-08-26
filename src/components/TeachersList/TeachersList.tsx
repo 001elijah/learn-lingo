@@ -5,11 +5,13 @@ import TeacherCard from "../TeacherCard/TeacherCard";
 import { Teacher } from "../../utils/types";
 
 const TeachersList = ({
+  isLoggedIn,
   teachers,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
 }: {
+  isLoggedIn: boolean;
   teachers: Teacher[];
   favoriteTeachers: Teacher[];
   addToFavorites: Function;
@@ -22,6 +24,7 @@ const TeachersList = ({
         {teachers.map((teacher, index) => (
           <TeacherCard
             key={index}
+            isLoggedIn={isLoggedIn}
             favoriteTeachers={favoriteTeachers}
             addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}

@@ -8,11 +8,13 @@ import BookTrialModal from "../BookTrialModal/BookTrialModal";
 import { Teacher } from "../../utils/types";
 
 const TeacherCard = ({
+  isLoggedIn,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
   teacherInfo,
 }: {
+  isLoggedIn: boolean;
   favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
@@ -56,21 +58,23 @@ const TeacherCard = ({
           </div>
         </div>
         <div>
-          {isLiked ? (
-            <LikeButton
-              icon={Liked}
-              alt={"liked"}
-              id={teacherInfo.id}
-              handleClick={handleToggleLiked}
-            />
-          ) : (
-            <LikeButton
-              icon={Like}
-              alt={"like"}
-              id={teacherInfo.id}
-              handleClick={handleToggleLiked}
-            />
-          )}
+          {isLiked
+            ? isLoggedIn && (
+                <LikeButton
+                  icon={Liked}
+                  alt={"liked"}
+                  id={teacherInfo.id}
+                  handleClick={handleToggleLiked}
+                />
+              )
+            : isLoggedIn && (
+                <LikeButton
+                  icon={Like}
+                  alt={"like"}
+                  id={teacherInfo.id}
+                  handleClick={handleToggleLiked}
+                />
+              )}
           <ul className={s.teacherCommonInfo}>
             <li>
               <span className={s.languages}>Languages</span>
