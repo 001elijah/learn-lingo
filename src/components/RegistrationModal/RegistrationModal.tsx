@@ -9,7 +9,12 @@ import EyeOn from "../../assets/icons/eye-on.svg";
 import { registerAPI } from "../../services/firebaseAPI";
 
 const RegistrationSchema = Yup.object().shape({
-  name: Yup.string().required("Required"),
+  name: Yup.string()
+    .required("Required")
+    .matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/, {
+      message: "Name may contain only letters, apostrophe, dash and spaces.",
+      excludeEmptyString: true,
+    }),
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(7, "Must contain 7 characters or more")
@@ -32,7 +37,6 @@ const RegistrationModal = ({
       password: "",
     },
     onSubmit: (values, actions) => {
-      console.log(values);
       registerAPI(values);
       actions.resetForm({ values: { name: "", email: "", password: "" } });
     },
@@ -76,8 +80,12 @@ const RegistrationModal = ({
             type="name"
             placeholder="Name"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.name}
           />
+          {formik.errors.name && formik.touched.name && (
+            <span className={s.error}>{formik.errors.name}</span>
+          )}
         </label>
         <label className={s.emailInputWrapper}>
           <input
@@ -87,8 +95,12 @@ const RegistrationModal = ({
             type="email"
             placeholder="Email"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.email}
           />
+          {formik.errors.email && formik.touched.email && (
+            <span className={s.error}>{formik.errors.email}</span>
+          )}
         </label>
         <label className={s.passwordInputWrapper}>
           <input
@@ -98,6 +110,7 @@ const RegistrationModal = ({
             type={passwordShown ? "text" : "password"}
             placeholder="Password"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.password}
           />
           <button
@@ -107,6 +120,9 @@ const RegistrationModal = ({
           >
             <img src={passwordShown ? Eye : EyeOn} alt="toggle show password" />
           </button>
+          {formik.errors.password && formik.touched.password && (
+            <span className={s.error}>{formik.errors.password}</span>
+          )}
         </label>
         <button className={s.submitButton} type="submit">
           Sign Up

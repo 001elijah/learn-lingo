@@ -140,6 +140,15 @@
   line-height: 1.5;
 }
 
+.error {
+  position: absolute;
+  bottom: -12px;
+  left: 16px;
+
+  font-size: 12px;
+  color: red;
+}
+
 .radioWrapper {
   border: none;
   padding: 0;
@@ -148,6 +157,8 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
+
+  position: relative;
 }
 
 .legend {
@@ -212,13 +223,14 @@ input[type="radio"] {
 
 .nameInputWrapper {
   width: 100%;
+  position: relative;
 }
 
 .nameInput {
   width: 100%;
   height: 54px;
   margin-top: 40px;
-  padding: 16px 18px 16px 18px;
+  padding: 16px 18px;
 
   border-radius: 12px;
   border: 1px solid rgba(18, 20, 23, 0.1);
@@ -239,13 +251,14 @@ input[type="radio"] {
 
 .emailInputWrapper {
   width: 100%;
+  position: relative;
 }
 
 .emailInput {
   width: 100%;
   height: 54px;
   margin-top: 20px;
-  padding: 16px 18px 16px 18px;
+  padding: 16px 18px;
 
   border-radius: 12px;
   border: 1px solid rgba(18, 20, 23, 0.1);
@@ -273,7 +286,7 @@ input[type="radio"] {
   width: 100%;
   height: 54px;
   margin: 20px 0 1px 0;
-  padding: 16px 18px 16px 18px;
+  padding: 16px 18px;
 
   border-radius: 12px;
   border: 1px solid rgba(18, 20, 23, 0.1);

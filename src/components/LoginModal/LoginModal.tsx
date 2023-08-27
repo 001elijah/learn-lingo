@@ -30,7 +30,6 @@ const LoginModal = ({
       password: "",
     },
     onSubmit: (values, actions) => {
-      console.log(JSON.stringify(values, null, 2));
       loginAPI(values);
       actions.resetForm({ values: { email: "", password: "" } });
       setIsModalOpen(false);
@@ -74,8 +73,12 @@ const LoginModal = ({
             type="email"
             placeholder="Email"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.email}
           />
+          {formik.errors.email && formik.touched.email && (
+            <span className={s.error}>{formik.errors.email}</span>
+          )}
         </label>
         <label className={s.passwordInputWrapper}>
           <input
@@ -85,6 +88,7 @@ const LoginModal = ({
             type={passwordShown ? "text" : "password"}
             placeholder="Password"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.password}
           />
           <button
@@ -94,6 +98,9 @@ const LoginModal = ({
           >
             <img src={passwordShown ? Eye : EyeOn} alt="toggle show password" />
           </button>
+          {formik.errors.password && formik.touched.password && (
+            <span className={s.error}>{formik.errors.password}</span>
+          )}
         </label>
         <button className={s.submitButton} type="submit">
           Log In

@@ -6,7 +6,13 @@ import X from "../../assets/icons/x.svg";
 import s from "./BookTrialModal.module.scss";
 
 const BookTrialSchema = Yup.object().shape({
-  name: Yup.string().required(),
+  reason: Yup.string().required("Required"),
+  name: Yup.string()
+    .required("Required")
+    .matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/, {
+      message: "Name may contain only letters, apostrophe, dash and spaces.",
+      excludeEmptyString: true,
+    }),
   email: Yup.string().email("Invalid email address").required("Required"),
   number: Yup.string()
     .min(7, "Must contain 7 characters or more")
@@ -27,7 +33,7 @@ const BookTrialModal = ({
   const nodeRef = useRef(null);
   const formik = useFormik({
     initialValues: {
-      picked: "",
+      reason: "",
       name: "",
       email: "",
       number: "",
@@ -35,7 +41,7 @@ const BookTrialModal = ({
     onSubmit: (values, actions) => {
       console.log(JSON.stringify(values, null, 2));
       actions.resetForm({
-        values: { picked: "", name: "", email: "", number: "" },
+        values: { reason: "", name: "", email: "", number: "" },
       });
     },
     validationSchema: BookTrialSchema,
@@ -43,9 +49,8 @@ const BookTrialModal = ({
 
   const handleRadioButtons = (e: React.ChangeEvent<HTMLInputElement>) => {
     const radio = e.target as HTMLInputElement;
-    formik.values.picked = radio.value;
+    formik.values.reason = radio.value;
   };
-
   return (
     <CSSTransition
       mountOnEnter
@@ -86,7 +91,7 @@ const BookTrialModal = ({
               <span className={s.teacherName}>{teacherName}</span>
             </div>
           </div>
-          <fieldset className={s.radioWrapper}>
+          <fieldset className={s.radioWrapper} onBlur={formik.handleBlur}>
             <legend className={s.legend}>
               What is your main reason for learning English?
             </legend>
@@ -153,6 +158,9 @@ const BookTrialModal = ({
                 Culture, travel or hobby
               </label>
             </div>
+            {formik.errors.reason && (
+              <span className={s.error}>{formik.errors.reason}</span>
+            )}
           </fieldset>
           <label className={s.nameInputWrapper}>
             <input
@@ -162,8 +170,12 @@ const BookTrialModal = ({
               type="name"
               placeholder="Full Name"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.name}
             />
+            {formik.errors.name && formik.touched.name && (
+              <span className={s.error}>{formik.errors.name}</span>
+            )}
           </label>
           <label className={s.emailInputWrapper}>
             <input
@@ -173,8 +185,12 @@ const BookTrialModal = ({
               type="email"
               placeholder="Email"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
             />
+            {formik.errors.email && formik.touched.email && (
+              <span className={s.error}>{formik.errors.email}</span>
+            )}
           </label>
           <label className={s.numberInputWrapper}>
             <input
@@ -184,8 +200,12 @@ const BookTrialModal = ({
               type="text"
               placeholder="Phone number"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.number}
             />
+            {formik.errors.number && formik.touched.number && (
+              <span className={s.error}>{formik.errors.number}</span>
+            )}
           </label>
         </div>
         <button className={s.submitButton} type="submit">
