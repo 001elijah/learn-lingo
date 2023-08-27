@@ -30,3 +30,6 @@ export const SIDEBAR_DATA_LOGGED_OUT = [
     icons: <AiIcons.AiOutlineAppstore />,
   },
 ];
+
+export const KEY_NAME_ESC = "Escape";
+export const KEY_EVENT_TYPE = "keyup";
