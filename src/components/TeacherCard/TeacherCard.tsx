@@ -6,6 +6,7 @@ import s from "./TeacherCard.module.scss";
 import ModalPortal from "../ModalPortal/ModalPortal";
 import BookTrialModal from "../BookTrialModal/BookTrialModal";
 import { Teacher } from "../../utils/types";
+import LoginModal from "../LoginModal/LoginModal";
 
 const TeacherCard = ({
   isLoggedIn,
@@ -21,16 +22,26 @@ const TeacherCard = ({
   teacherInfo: Teacher;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginModal, setIsLoginModal] = useState(false);
+  const [isBookTrialModal, setIsBookTrialModal] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const handleOpenModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const handleOpenModal = async () => {
+    setIsLoginModal(false);
+    await setIsBookTrialModal(true);
+    setIsModalOpen(true);
   };
 
-  const handleToggleLiked = (id: string) => {
-    if (!isLiked) {
-      addToFavorites(id);
+  const handleToggleLiked = async (id: string) => {
+    if (isLoggedIn) {
+      if (!isLiked) {
+        addToFavorites(id);
+      } else {
+        removeFromFavorites(id);
+      }
     } else {
-      removeFromFavorites(id);
+      setIsBookTrialModal(false);
+      await setIsLoginModal(true);
+      setIsModalOpen(true);
     }
   };
 
@@ -58,23 +69,21 @@ const TeacherCard = ({
           </div>
         </div>
         <div>
-          {isLiked
-            ? isLoggedIn && (
-                <LikeButton
-                  icon={Liked}
-                  alt={"liked"}
-                  id={teacherInfo.id}
-                  handleClick={handleToggleLiked}
-                />
-              )
-            : isLoggedIn && (
-                <LikeButton
-                  icon={Like}
-                  alt={"like"}
-                  id={teacherInfo.id}
-                  handleClick={handleToggleLiked}
-                />
-              )}
+          {isLiked ? (
+            <LikeButton
+              icon={Liked}
+              alt={"liked"}
+              id={teacherInfo.id}
+              handleClick={handleToggleLiked}
+            />
+          ) : (
+            <LikeButton
+              icon={Like}
+              alt={"like"}
+              id={teacherInfo.id}
+              handleClick={handleToggleLiked}
+            />
+          )}
           <ul className={s.teacherCommonInfo}>
             <li>
               <span className={s.languages}>Languages</span>
@@ -162,12 +171,20 @@ const TeacherCard = ({
         </div>
       </li>
       <ModalPortal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-        <BookTrialModal
-          teacherName={teacherInfo.name + " " + teacherInfo.surname}
-          teacherPhoto={teacherInfo.avatar_url}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-        />
+        {isBookTrialModal && (
+          <BookTrialModal
+            teacherName={teacherInfo.name + " " + teacherInfo.surname}
+            teacherPhoto={teacherInfo.avatar_url}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
+        {isLoginModal && (
+          <LoginModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
       </ModalPortal>
     </>
   );
