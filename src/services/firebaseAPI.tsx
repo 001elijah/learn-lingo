@@ -3,18 +3,20 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { collection, getDocs, DocumentData } from "firebase/firestore";
+
 import { auth, db } from "./firebaseConfig";
 import { Teacher, User } from "../utils/types";
 
-export const readTeachersAPI = async () => {
+//Firebase pagination
+export const readTeachersPaginateAPI = async (lasTeacherItem: number) => {
   try {
-    const response: Teacher[] = [];
-    const snapshot = (await getDocs(
-      collection(db, "teachers"),
-    )) as DocumentData;
-
-    snapshot.forEach((doc: any) => response.push(doc.data()));
+    const teachersRef = db.collection("teachers");
+    const snapshot = await teachersRef
+      .orderBy("id", "asc")
+      .startAfter(lasTeacherItem)
+      .limit(4)
+      .get();
+    const response: Teacher[] = snapshot.docs.map((doc: any) => doc.data());
     return response;
   } catch (error) {
     console.log(error);

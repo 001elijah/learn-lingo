@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Teachers from "./pages/Teachers";
 import Favorites from "./pages/Favorites";
 import Header from "./components/Header/Header";
-import { readTeachersAPI } from "./services/firebaseAPI";
+import { readTeachersPaginateAPI } from "./services/firebaseAPI";
 import { Teacher } from "./utils/types";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./services/firebaseConfig";
@@ -13,9 +13,12 @@ function App() {
   const [bodyColor, setBodyColor] = useState("#fff");
   const changeColor = (color: string) => {
     setBodyColor(color);
+    document.body.style.backgroundColor = color;
   };
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const [lastTeacherItem, setLastTeacherItem] = useState<number>(0);
+  const [endOfCollection, setEndOfCollection] = useState<boolean>(false);
   const [favoriteTeachers, setFavoriteTeachers] = useState<Teacher[]>(() => {
     try {
       const items = JSON.parse(localStorage.getItem("favoriteTeachers") || "");
@@ -42,6 +45,16 @@ function App() {
     );
   };
 
+  const handleLoadMore = async () => {
+    const newTeachers: any = await readTeachersPaginateAPI(lastTeacherItem);
+    if (newTeachers) {
+      setTeachers((teachers) => [...teachers, ...newTeachers]);
+    }
+    if (newTeachers.length === 0 || newTeachers.length < 4) {
+      setEndOfCollection(true);
+    }
+  };
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -53,13 +66,20 @@ function App() {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      const items: any = await readTeachersAPI();
-      if (items) {
-        setTeachers(items);
-      }
-    })();
+    if (lastTeacherItem === 0) {
+      (async () => {
+        // const items: any = await readTeachersAPI();
+        const newTeachers: any = await readTeachersPaginateAPI(lastTeacherItem);
+        if (newTeachers) {
+          setTeachers((teachers) => [...teachers, ...newTeachers]);
+        }
+      })();
+    }
   }, []);
+
+  useEffect(() => {
+    setLastTeacherItem(teachers.length);
+  }, [teachers.length]);
 
   useEffect(() => {
     try {
@@ -72,6 +92,10 @@ function App() {
     }
   }, [favoriteTeachers]);
 
+  if (teachers.length === 0) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <div style={{ background: bodyColor }} id="main">
       <Routes>
@@ -81,6 +105,8 @@ function App() {
             path="/teachers"
             element={
               <Teachers
+                endOfCollection={endOfCollection}
+                handleLoadMore={handleLoadMore}
                 isLoggedIn={isLoggedIn}
                 teachers={teachers}
                 favoriteTeachers={favoriteTeachers}

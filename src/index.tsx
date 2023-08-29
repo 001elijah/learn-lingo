@@ -6,9 +6,7 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(
-  <React.StrictMode>
-    <BrowserRouter basename="/learn-lingo">
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter basename="/learn-lingo">
+    <App />
+  </BrowserRouter>,
 );

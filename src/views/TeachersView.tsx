@@ -3,12 +3,16 @@ import TeachersList from "../components/TeachersList/TeachersList";
 import { Teacher } from "../utils/types";
 
 const TeachersView = ({
+  endOfCollection,
+  handleLoadMore,
   isLoggedIn,
   teachers,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
 }: {
+  endOfCollection: boolean;
+  handleLoadMore: Function;
   isLoggedIn: boolean;
   teachers: Teacher[];
   favoriteTeachers: Teacher[];
@@ -18,6 +22,8 @@ const TeachersView = ({
   return (
     <section className="sectionContainer">
       <TeachersList
+        endOfCollection={endOfCollection}
+        handleLoadMore={handleLoadMore}
         isLoggedIn={isLoggedIn}
         teachers={teachers}
         favoriteTeachers={favoriteTeachers}

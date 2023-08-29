@@ -9,7 +9,6 @@ import Logo from "../Logo/Logo";
 import Navbar from "../Navbar/Navbar";
 import NavbarAuth from "../NavbarAuth/NavbarAuth";
 import s from "./Header.module.scss";
-import { NONAME } from "dns";
 
 const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });

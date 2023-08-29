@@ -3,14 +3,19 @@ import s from "./TeachersList.module.scss";
 
 import TeacherCard from "../TeacherCard/TeacherCard";
 import { Teacher } from "../../utils/types";
+import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
 
 const TeachersList = ({
+  endOfCollection,
+  handleLoadMore,
   isLoggedIn,
   teachers,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
 }: {
+  endOfCollection: boolean;
+  handleLoadMore: Function;
   isLoggedIn: boolean;
   teachers: Teacher[];
   favoriteTeachers: Teacher[];
@@ -32,6 +37,7 @@ const TeachersList = ({
           />
         ))}
       </ul>
+      {!endOfCollection && <LoadMoreButton handleLoadMore={handleLoadMore} />}
     </>
   );
 };

@@ -3,6 +3,8 @@ import TeachersView from "../views/TeachersView";
 import { Teacher } from "../utils/types";
 
 const Teachers = ({
+  endOfCollection,
+  handleLoadMore,
   isLoggedIn,
   teachers,
   favoriteTeachers,
@@ -10,6 +12,8 @@ const Teachers = ({
   removeFromFavorites,
   changeColor,
 }: {
+  endOfCollection: boolean;
+  handleLoadMore: Function;
   isLoggedIn: boolean;
   teachers: Teacher[];
   favoriteTeachers: Teacher[];
@@ -23,6 +27,8 @@ const Teachers = ({
 
   return (
     <TeachersView
+      endOfCollection={endOfCollection}
+      handleLoadMore={handleLoadMore}
       isLoggedIn={isLoggedIn}
       teachers={teachers}
       favoriteTeachers={favoriteTeachers}
