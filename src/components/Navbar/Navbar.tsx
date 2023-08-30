@@ -10,6 +10,7 @@ import {
 } from "../../utils/constants";
 import NavbarAuth from "../NavbarAuth/NavbarAuth";
 import s from "./Navbar.module.scss";
+import ModalPortal from "../ModalPortal/ModalPortal";
 
 const Navbar = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [sidebar, setSidebar] = useState(false);
@@ -34,45 +35,47 @@ const Navbar = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             </Link>
           </div>
         )}
-        <nav className={sidebar ? clsx(s.sidebar, s.active) : s.sidebar}>
-          <ul>
-            <li className={s.navbarTop}>
-              <Link to="#" className={s.menuControls}>
-                <AiIcons.AiOutlineClose
-                  className={s.closeIcon}
-                  onClick={toggleSidebar}
-                />
-              </Link>
-            </li>
-            {(isLoggedIn
-              ? SIDEBAR_DATA_LOGGED_IN
-              : SIDEBAR_DATA_LOGGED_OUT
-            ).map((item, index) => {
-              return (
-                <li key={index} className={s.navText}>
-                  <NavLink
-                    to={item.path}
-                    onClick={() => {
-                      toggleSidebar();
-                    }}
-                    className={({ isActive }) => (isActive ? s.isActive : "")}
-                  >
-                    {item.icons}
-                    <span>{item.title}</span>
-                  </NavLink>
-                </li>
-              );
-            })}
-          </ul>
-          <NavbarAuth
-            isLoggedIn={isLoggedIn}
-            navbarAuth={s.navbarAuth}
-            navbarLogin={s.navbarLogin}
-            navbarLogout={s.navbarLogout}
-            navbarRegister={s.navbarRegister}
-            toggleSidebar={toggleSidebar}
-          />
-        </nav>
+        <ModalPortal isModalOpen={sidebar} setIsModalOpen={setSidebar}>
+          <nav className={sidebar ? clsx(s.sidebar, s.active) : s.sidebar}>
+            <ul>
+              <li className={s.navbarTop}>
+                <Link to="#" className={s.menuControls}>
+                  <AiIcons.AiOutlineClose
+                    className={s.closeIcon}
+                    onClick={toggleSidebar}
+                  />
+                </Link>
+              </li>
+              {(isLoggedIn
+                ? SIDEBAR_DATA_LOGGED_IN
+                : SIDEBAR_DATA_LOGGED_OUT
+              ).map((item, index) => {
+                return (
+                  <li key={index} className={s.navText}>
+                    <NavLink
+                      to={item.path}
+                      onClick={() => {
+                        toggleSidebar();
+                      }}
+                      className={({ isActive }) => (isActive ? s.isActive : "")}
+                    >
+                      {item.icons}
+                      <span>{item.title}</span>
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+            <NavbarAuth
+              isLoggedIn={isLoggedIn}
+              navbarAuth={s.navbarAuth}
+              navbarLogin={s.navbarLogin}
+              navbarLogout={s.navbarLogout}
+              navbarRegister={s.navbarRegister}
+              toggleSidebar={toggleSidebar}
+            />
+          </nav>
+        </ModalPortal>
       </IconContext.Provider>
     </>
   );
