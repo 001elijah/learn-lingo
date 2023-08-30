@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import s from "./LoginModal.module.scss";
 import { CSSTransition } from "react-transition-group";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -7,6 +6,7 @@ import X from "../../assets/icons/x.svg";
 import Eye from "../../assets/icons/eye-off.svg";
 import EyeOn from "../../assets/icons/eye-on.svg";
 import { loginAPI } from "../../services/firebaseAPI";
+import s from "./LoginModal.module.scss";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -15,13 +15,12 @@ const LoginSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const LoginModal = ({
-  isModalOpen,
-  setIsModalOpen,
-}: {
+type Props = {
   isModalOpen: boolean;
   setIsModalOpen: Function;
-}) => {
+};
+
+const LoginModal = ({ isModalOpen, setIsModalOpen }: Props) => {
   const [passwordShown, setPasswordShown] = useState(false);
   const nodeRef = useRef(null);
   const formik = useFormik({

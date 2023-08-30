@@ -6,15 +6,13 @@ import { useEscapeKey } from "../../utils/useEscapeKey";
 const modalRoot: any | null = document.getElementById("modal-root");
 const windowRoot: any | null = document.getElementById("window-root");
 
-const ModalPortal = ({
-  children,
-  isModalOpen,
-  setIsModalOpen,
-}: {
+type Props = {
   children: any;
   isModalOpen: boolean;
   setIsModalOpen: Function;
-}) => {
+};
+
+const ModalPortal = ({ children, isModalOpen, setIsModalOpen }: Props) => {
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";

@@ -4,17 +4,19 @@ import TeacherCard from "../TeacherCard/TeacherCard";
 import s from "./FavoriteTeachersList.module.scss";
 import { Teacher } from "../../utils/types";
 
+type Props = {
+  isLoggedIn: boolean;
+  favoriteTeachers: Teacher[];
+  addToFavorites: Function;
+  removeFromFavorites: Function;
+};
+
 const FavoriteTeachersList = ({
   isLoggedIn,
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
-}: {
-  isLoggedIn: boolean;
-  favoriteTeachers: Teacher[];
-  addToFavorites: Function;
-  removeFromFavorites: Function;
-}) => {
+}: Props) => {
   return (
     <>
       <h1 className={s.title}>Favorite Teachers</h1>

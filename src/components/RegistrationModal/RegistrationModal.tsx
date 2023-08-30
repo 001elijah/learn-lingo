@@ -21,13 +21,12 @@ const RegistrationSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const RegistrationModal = ({
-  isModalOpen,
-  setIsModalOpen,
-}: {
+type Props = {
   isModalOpen: boolean;
   setIsModalOpen: Function;
-}) => {
+};
+
+const RegistrationModal = ({ isModalOpen, setIsModalOpen }: Props) => {
   const [passwordShown, setPasswordShown] = useState(false);
   const nodeRef = useRef(null);
   const formik = useFormik({

@@ -1,5 +1,4 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import s from "./LoadMoreButton.module.scss";
 
 interface Props extends React.ComponentPropsWithoutRef<"button"> {

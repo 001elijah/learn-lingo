@@ -19,17 +19,19 @@ const BookTrialSchema = Yup.object().shape({
     .required("Required"),
 });
 
+type Props = {
+  teacherName: string;
+  teacherPhoto: string;
+  isModalOpen: boolean;
+  setIsModalOpen: Function;
+};
+
 const BookTrialModal = ({
   teacherName,
   teacherPhoto,
   isModalOpen,
   setIsModalOpen,
-}: {
-  teacherName: string;
-  teacherPhoto: string;
-  isModalOpen: boolean;
-  setIsModalOpen: Function;
-}) => {
+}: Props) => {
   const nodeRef = useRef(null);
   const formik = useFormik({
     initialValues: {

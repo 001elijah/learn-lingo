@@ -5,6 +5,16 @@ import TeacherCard from "../TeacherCard/TeacherCard";
 import { Teacher } from "../../utils/types";
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
 
+type Props = {
+  endOfCollection: boolean;
+  handleLoadMore: Function;
+  isLoggedIn: boolean;
+  teachers: Teacher[];
+  favoriteTeachers: Teacher[];
+  addToFavorites: Function;
+  removeFromFavorites: Function;
+};
+
 const TeachersList = ({
   endOfCollection,
   handleLoadMore,
@@ -13,16 +23,7 @@ const TeachersList = ({
   favoriteTeachers,
   addToFavorites,
   removeFromFavorites,
-}: {
-  endOfCollection: boolean;
-  handleLoadMore: Function;
-  isLoggedIn: boolean;
-  teachers: Teacher[];
-  favoriteTeachers: Teacher[];
-  addToFavorites: Function;
-  removeFromFavorites: Function;
-  }) => {
-  
+}: Props) => {
   if (teachers.length === 0) {
     return <div className={s.loader}></div>;
   }
