@@ -25,6 +25,12 @@ const TeacherCard = ({
   const [isLoginModal, setIsLoginModal] = useState(false);
   const [isBookTrialModal, setIsBookTrialModal] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+
+  const handleToggleShowMore = () => {
+    setShowMore(!showMore);
+  }
+
   const handleOpenModal = async () => {
     setIsLoginModal(false);
     await setIsBookTrialModal(true);
@@ -133,31 +139,35 @@ const TeacherCard = ({
               </span>
             </li>
           </ul>
-          <p className={s.paragraphLineHeight}>{teacherInfo.experience}</p>
-          <ul className={s.reviewInstances}>
-            {teacherInfo.reviews.map((review, index) => (
-              <li key={index}>
-                <div className={s.reviewerData}>
-                  <div className={s.reviewerAvatar}>
-                    <img
-                      className={s.reviewerPhoto}
-                      src={review.reviewer_avatar_url}
-                      alt={review.reviewer_name}
-                    />
+          {showMore && 
+          <>
+            <p className={s.paragraphLineHeight}>{teacherInfo.experience}</p>
+            <ul className={s.reviewInstances}>
+              {teacherInfo.reviews.map((review, index) => (
+                <li key={index}>
+                  <div className={s.reviewerData}>
+                    <div className={s.reviewerAvatar}>
+                      <img
+                        className={s.reviewerPhoto}
+                        src={review.reviewer_avatar_url}
+                        alt={review.reviewer_name}
+                      />
+                    </div>
+                    <div className={s.reviewerNameAndRating}>
+                      <span className={s.colorGrey}>{review.reviewer_name}</span>
+                      <span className={s.ratingWithStar}>
+                        {(Math.round(review.reviewer_rating * 10) / 10).toFixed(
+                          1,
+                        )}
+                      </span>
+                    </div>
                   </div>
-                  <div className={s.reviewerNameAndRating}>
-                    <span className={s.colorGrey}>{review.reviewer_name}</span>
-                    <span className={s.ratingWithStar}>
-                      {(Math.round(review.reviewer_rating * 10) / 10).toFixed(
-                        1,
-                      )}
-                    </span>
-                  </div>
-                </div>
-                <p>{review.comment}</p>
-              </li>
-            ))}
-          </ul>
+                  <p>{review.comment}</p>
+                </li>
+              ))}
+            </ul>
+            </>}
+          {!showMore && <button className={s.readMoreBtn} type="button" onClick={handleToggleShowMore}>Read more</button>}
           <ul className={s.levels}>
             {teacherInfo.levels.map((level, index) => (
               <li key={index} className={s.level}>

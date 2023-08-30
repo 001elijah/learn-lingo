@@ -92,10 +92,6 @@ function App() {
     }
   }, [favoriteTeachers]);
 
-  if (teachers.length === 0) {
-    return <h1>Loading...</h1>;
-  }
-
   return (
     <div style={{ background: bodyColor }} id="main">
       <Routes>

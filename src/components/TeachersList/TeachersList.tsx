@@ -21,7 +21,12 @@ const TeachersList = ({
   favoriteTeachers: Teacher[];
   addToFavorites: Function;
   removeFromFavorites: Function;
-}) => {
+  }) => {
+  
+  if (teachers.length === 0) {
+    return <div className={s.loader}></div>;
+  }
+
   return (
     <>
       <h1 className={s.title}>Teachers</h1>
