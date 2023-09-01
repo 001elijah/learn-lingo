@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home";
 import Teachers from "./pages/Teachers";
 import Favorites from "./pages/Favorites";
@@ -21,19 +22,6 @@ function App() {
   const [lastTeacherItem, setLastTeacherItem] = useState<number>(0);
   const [endOfCollection, setEndOfCollection] = useState<boolean>(false);
   const [favoriteTeachers, setFavoriteTeachers] = useState<Teacher[]>([]);
-
-  // fetching userFavoriteItems from Firebase
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     (async () => {
-  //       const favTeachers: any = await getUserFavoritesAPI(uid);
-  //       if (favTeachers) {
-  //         console.log(favTeachers);
-  //         setFavoriteTeachers([...favTeachers]);
-  //       }
-  //     })();
-  //   }
-  // }, [isLoggedIn, uid]);
 
   useEffect(() => {
     try {
@@ -149,6 +137,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
