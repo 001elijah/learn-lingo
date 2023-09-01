@@ -16,21 +16,36 @@ function App() {
     document.body.style.backgroundColor = color;
   };
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [uid, setUid] = useState("");
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [lastTeacherItem, setLastTeacherItem] = useState<number>(0);
   const [endOfCollection, setEndOfCollection] = useState<boolean>(false);
-  const [favoriteTeachers, setFavoriteTeachers] = useState<Teacher[]>(() => {
+  const [favoriteTeachers, setFavoriteTeachers] = useState<Teacher[]>([]);
+
+  useEffect(() => {
     try {
-      const items = JSON.parse(localStorage.getItem("favoriteTeachers") || "");
+      const items = JSON.parse(localStorage.getItem(uid) || "");
       if (items) {
-        return items;
+        setFavoriteTeachers(items);
       } else {
-        return [];
+        setFavoriteTeachers([]);
       }
     } catch (error: any) {
-      return [];
+      setFavoriteTeachers([]);
     }
-  });
+  }, [uid])
+
+  // useEffect(() => {
+  //   if (favoriteTeachers.length === 0 && isLoggedIn) {
+  //     // console.log(getUserFavoritesAPI())
+  //     const fetchData = async () => {
+  //       const result = await getUserFavoritesAPI();
+  //       console.log(result);
+  //     }
+  //     fetchData();
+  //   }
+  // }, [favoriteTeachers.length, isLoggedIn]);
+  
 
   const addToFavorites = (id: string) => {
     const teacher = teachers.filter((item) => item.id === id);
@@ -59,8 +74,11 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
+        const { uid } = user;
+        setUid(uid);
       } else {
         setIsLoggedIn(false);
+        setUid("");
       }
     });
   }, []);
@@ -85,15 +103,15 @@ function App() {
     if (isLoggedIn) {
       try {
         localStorage.setItem(
-          "favoriteTeachers",
+          uid,
           JSON.stringify(favoriteTeachers),
         );
       } catch (error: any) {
         console.log(error.message);
       }
-      // updateUserFavoritesAPI(favoriteTeachers);
+      updateUserFavoritesAPI(favoriteTeachers);
     }
-  }, [isLoggedIn, favoriteTeachers]);
+  }, [isLoggedIn, uid, favoriteTeachers]);
 
   return (
     <div style={{ background: bodyColor }} id="main">

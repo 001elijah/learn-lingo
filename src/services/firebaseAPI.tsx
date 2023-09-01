@@ -59,7 +59,7 @@ export const updateUserFavoritesAPI = async (favoriteTeachers: Teacher[]) => {
       if (user) {
         const uid = user.uid;
         const usersRef = db.collection("users");
-        await usersRef.doc(uid).set({ favoriteTeachers: [...favoriteTeachers] }, {merge: true});
+        await usersRef.doc(uid).update({ favoriteTeachers });
       }
     });
   } catch (error: any) {
