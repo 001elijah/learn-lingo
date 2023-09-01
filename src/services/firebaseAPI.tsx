@@ -41,7 +41,6 @@ export const registerAPI = async (newUserData: User) => {
     });
     return user;
   } catch (error: any) {
-    // alert(error.message);
     const notify = () => toast(error.message);
     notify();
   }
@@ -68,7 +67,6 @@ export const updateUserFavoritesAPI = async (favoriteTeachers: Teacher[]) => {
       }
     });
   } catch (error: any) {
-    // alert(error.message)
     const notify = () => toast(error.message);
     notify();
   }
@@ -103,7 +101,6 @@ export const loginAPI = async (userData: User) => {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
     return user;
   } catch (error: any) {
-    // alert(error.message);
     const notify = () => toast(error.message);
     notify();
   }
@@ -113,7 +110,6 @@ export const logoutAPI = async () => {
   try {
     await auth.signOut();
   } catch (error: any) {
-    // alert(error.message);
     const notify = () => toast(error.message);
     notify();
   }
