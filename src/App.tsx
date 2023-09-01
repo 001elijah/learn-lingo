@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Teachers from "./pages/Teachers";
 import Favorites from "./pages/Favorites";
 import Header from "./components/Header/Header";
-import { readTeachersPaginateAPI } from "./services/firebaseAPI";
+import { getUserFavoritesAPI, readTeachersPaginateAPI, updateUserFavoritesAPI } from "./services/firebaseAPI";
 import { Teacher } from "./utils/types";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./services/firebaseConfig";
@@ -28,7 +28,7 @@ function App() {
         return [];
       }
     } catch (error: any) {
-      console.log(error);
+      return [];
     }
   });
 
@@ -68,7 +68,6 @@ function App() {
   useEffect(() => {
     if (lastTeacherItem === 0) {
       (async () => {
-        // const items: any = await readTeachersAPI();
         const newTeachers: any = await readTeachersPaginateAPI(lastTeacherItem);
         if (newTeachers) {
           setTeachers((teachers) => [...teachers, ...newTeachers]);
@@ -80,17 +79,21 @@ function App() {
   useEffect(() => {
     setLastTeacherItem(teachers.length);
   }, [teachers.length]);
+  
 
   useEffect(() => {
-    try {
-      localStorage.setItem(
-        "favoriteTeachers",
-        JSON.stringify(favoriteTeachers),
-      );
-    } catch (error: any) {
-      console.log(error.message);
+    if (isLoggedIn) {
+      try {
+        localStorage.setItem(
+          "favoriteTeachers",
+          JSON.stringify(favoriteTeachers),
+        );
+      } catch (error: any) {
+        console.log(error.message);
+      }
+      // updateUserFavoritesAPI(favoriteTeachers);
     }
-  }, [favoriteTeachers]);
+  }, [isLoggedIn, favoriteTeachers]);
 
   return (
     <div style={{ background: bodyColor }} id="main">

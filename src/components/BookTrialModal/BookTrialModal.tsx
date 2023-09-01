@@ -45,6 +45,7 @@ const BookTrialModal = ({
       actions.resetForm({
         values: { reason: "", name: "", email: "", number: "" },
       });
+      setIsModalOpen(false);
     },
     validationSchema: BookTrialSchema,
   });

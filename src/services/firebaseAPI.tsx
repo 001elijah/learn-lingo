@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
 
@@ -40,6 +41,57 @@ export const registerAPI = async (newUserData: User) => {
     alert(error.message);
   }
 };
+
+export const createUserInstanceInDB = async (newUserData: User) => {
+  const { name, email } = newUserData;
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const uid = user.uid;
+      const usersRef = db.collection("users");
+      await usersRef.doc(uid).set({ name, email, favoriteTeachers: [] });
+    }
+  });
+};
+
+export const updateUserFavoritesAPI = async (favoriteTeachers: Teacher[]) => {
+  try {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const uid = user.uid;
+        const usersRef = db.collection("users");
+        await usersRef.doc(uid).set({ favoriteTeachers: [...favoriteTeachers] }, {merge: true});
+      }
+    });
+  } catch (error: any) {
+    alert(error.message)
+  }
+};
+
+export const getUserFavoritesAPI = async () => {
+  try {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const uid = user.uid;
+        const usersRef = db.collection("users").doc(uid);
+        const doc = await usersRef.get();
+        if (!doc.exists) {
+          console.log([])
+          return []
+        } else {
+          const response = doc.data();
+          if (response) {
+            return response.favoriteTeachers;
+          } else {
+            return [];
+          }
+        }
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 
 export const loginAPI = async (userData: User) => {
   const { email, password } = userData;

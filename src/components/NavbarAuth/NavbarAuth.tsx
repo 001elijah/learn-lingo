@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginIcon from "../../assets/icons/login.svg";
 import LoginModal from "../LoginModal/LoginModal";
 import ModalPortal from "../ModalPortal/ModalPortal";
@@ -22,6 +23,7 @@ const NavbarAuth = ({
   navbarLogout,
   navbarRegister,
 }: Props) => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(false);
   const [isRegistrationModal, setIsRegistrationModal] = useState(false);
@@ -43,6 +45,8 @@ const NavbarAuth = ({
 
   const handleLogout = () => {
     logoutAPI();
+    // localStorage.setItem("favoriteTeachers", JSON.stringify([]));
+    navigate("/");
   };
 
   return (

@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import X from "../../assets/icons/x.svg";
 import Eye from "../../assets/icons/eye-off.svg";
 import EyeOn from "../../assets/icons/eye-on.svg";
-import { registerAPI } from "../../services/firebaseAPI";
+import { createUserInstanceInDB, registerAPI } from "../../services/firebaseAPI";
 
 const RegistrationSchema = Yup.object().shape({
   name: Yup.string()
@@ -35,9 +35,11 @@ const RegistrationModal = ({ isModalOpen, setIsModalOpen }: Props) => {
       email: "",
       password: "",
     },
-    onSubmit: (values, actions) => {
-      registerAPI(values);
+    onSubmit: async (values, actions) => {
+      await registerAPI(values);
+      await createUserInstanceInDB(values);
       actions.resetForm({ values: { name: "", email: "", password: "" } });
+      setIsModalOpen(false);
     },
     validationSchema: RegistrationSchema,
   });
