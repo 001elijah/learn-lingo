@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Teachers from "./pages/Teachers";
 import Favorites from "./pages/Favorites";
 import Header from "./components/Header/Header";
-import { getUserFavoritesAPI, readTeachersPaginateAPI, updateUserFavoritesAPI } from "./services/firebaseAPI";
+import { readTeachersPaginateAPI, updateUserFavoritesAPI } from "./services/firebaseAPI";
 import { Teacher } from "./utils/types";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./services/firebaseConfig";
