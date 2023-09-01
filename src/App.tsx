@@ -22,6 +22,19 @@ function App() {
   const [endOfCollection, setEndOfCollection] = useState<boolean>(false);
   const [favoriteTeachers, setFavoriteTeachers] = useState<Teacher[]>([]);
 
+  // fetching userFavoriteItems from Firebase
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     (async () => {
+  //       const favTeachers: any = await getUserFavoritesAPI(uid);
+  //       if (favTeachers) {
+  //         console.log(favTeachers);
+  //         setFavoriteTeachers([...favTeachers]);
+  //       }
+  //     })();
+  //   }
+  // }, [isLoggedIn, uid]);
+
   useEffect(() => {
     try {
       const items = JSON.parse(localStorage.getItem(uid) || "");
@@ -34,18 +47,6 @@ function App() {
       setFavoriteTeachers([]);
     }
   }, [uid])
-
-  // useEffect(() => {
-  //   if (favoriteTeachers.length === 0 && isLoggedIn) {
-  //     // console.log(getUserFavoritesAPI())
-  //     const fetchData = async () => {
-  //       const result = await getUserFavoritesAPI();
-  //       console.log(result);
-  //     }
-  //     fetchData();
-  //   }
-  // }, [favoriteTeachers.length, isLoggedIn]);
-  
 
   const addToFavorites = (id: string) => {
     const teacher = teachers.filter((item) => item.id === id);

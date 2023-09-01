@@ -67,26 +67,23 @@ export const updateUserFavoritesAPI = async (favoriteTeachers: Teacher[]) => {
   }
 };
 
-export const getUserFavoritesAPI = async () => {
+export const getUserFavoritesAPI = async (uid: string) => {
   try {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const uid = user.uid;
         const usersRef = db.collection("users").doc(uid);
         const doc = await usersRef.get();
         if (!doc.exists) {
-          console.log([])
+          // console.log([])
           return []
         } else {
-          const response = doc.data();
-          if (response) {
-            return response.favoriteTeachers;
+          const userData = doc.data();
+          if (userData) {
+            const response = userData.favoriteTeachers;
+            console.log(response);
+            return response;
           } else {
             return [];
           }
         }
-      }
-    });
   } catch (error) {
     console.log(error);
     throw error;
